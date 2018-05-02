@@ -69,7 +69,10 @@ public class ProductoController implements Initializable {
     /* Control de botones */
     
     public void desactivarControles() {
-        
+        txtDescripcion.setEditable(false);
+        cmbCategoria.setDisable(true);
+        cmbMarca.setDisable(true);
+        cmbTalla.setDisable(true);
     }
     
     public void activarControles() {
@@ -77,6 +80,26 @@ public class ProductoController implements Initializable {
     }
     
     public void limpiarControles() {
+        
+    }
+    
+    public void nuevo() {
+        
+    }
+    
+    public void eliminar() {
+        
+    }
+    
+    public void editar() {
+        
+    }
+    
+    public void cancelar() {
+        
+    }
+    
+    public void seleccionarElemento() {
         
     }
 }
