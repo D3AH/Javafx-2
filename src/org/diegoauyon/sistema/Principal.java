@@ -12,8 +12,10 @@ import javafx.scene.layout.AnchorPane;
 /* Proyect's Class */
 import org.diegoauyon.controller.MenuPrincipalController;
 import org.diegoauyon.controller.CategoriaController;
+import org.diegoauyon.controller.ClienteController;
 import org.diegoauyon.controller.MarcaController;
 import org.diegoauyon.controller.ProductoController;
+import org.diegoauyon.controller.ProveedorController;
 import org.diegoauyon.controller.TallaController;
     
 
@@ -65,6 +67,24 @@ public class Principal extends Application {
     public void ventanaTallas() {
         try {
             TallaController tallaController = (TallaController) cambiarEscena("TallaView.fxml");
+            tallaController.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void ventanaClientes() {
+        try {
+            ClienteController tallaController = (ClienteController) cambiarEscena("ClienteView.fxml");
+            tallaController.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void ventanaProveedor() {
+        try {
+            ProveedorController tallaController = (ProveedorController) cambiarEscena("ProveedorView.fxml");
             tallaController.setEscenarioPrincipal(this);
         } catch (Exception e) {
             e.printStackTrace();

@@ -212,9 +212,9 @@ public class ProductoController implements Initializable {
             Producto registro = ((Producto)tblProducto.getSelectionModel().getSelectedItem());
             registro.setCodigoProducto(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getCodigoProducto());
             registro.setDescripcion(txtDescripcion.getText());
-            registro.setCodigoCategoria(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getCodigoCategoria());
-            registro.setCodigoMarca(((Marca) cmbMarca.getSelectionModel().getSelectedItem()).getCodigoMarca());
-            registro.setCodigoTalla(((Talla) cmbTalla.getSelectionModel().getSelectedItem()).getCodigoTalla());
+            registro.setCodigoCategoria(((Categoria)cmbCategoria.getSelectionModel().getSelectedItem()).getCodigoCategoria());
+            registro.setCodigoMarca(((Marca)cmbMarca.getSelectionModel().getSelectedItem()).getCodigoMarca());
+            registro.setCodigoTalla(((Talla)cmbTalla.getSelectionModel().getSelectedItem()).getCodigoTalla());
             registro.setImagen(txtImagen.getText());
             procedimiento.setInt(1, registro.getCodigoProducto());
             procedimiento.setString(2, registro.getDescripcion());  
@@ -299,7 +299,7 @@ public class ProductoController implements Initializable {
                             PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_EliminarProducto(?)}");
                             procedimiento.setInt(1, ((Producto)tblProducto.getSelectionModel().getSelectedItem()).getCodigoProducto());
                             procedimiento.execute();
-                            listaCategoria.remove(tblProducto.getSelectionModel().getSelectedIndex());
+                            listaProducto.remove(tblProducto.getSelectionModel().getSelectedIndex());
                             limpiarControles();
                             cargarDatos();
                         } catch (SQLException e) {

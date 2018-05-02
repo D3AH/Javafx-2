@@ -38,4 +38,12 @@ public class MenuPrincipalController implements Initializable {
         escenarioPrincipal.ventanaTallas();
     }
     
+    public void ventanaClientes(){
+        escenarioPrincipal.ventanaClientes();
+    }
+    
+    public void ventanaProveedor(){
+        escenarioPrincipal.ventanaProveedor();
+    }
+    
 }
