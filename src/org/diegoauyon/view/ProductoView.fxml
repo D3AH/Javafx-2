@@ -124,7 +124,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="btnFilePicker" disable="true" mnemonicParsing="false" text="Button">
+                        <Button fx:id="btnFilePicker" disable="true" mnemonicParsing="false" onAction="#seleccionarArchivo" text="Button">
                            <HBox.margin>
                               <Insets top="5.0" />
                            </HBox.margin>

@@ -1,5 +1,6 @@
 package org.diegoauyon.controller;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import javax.swing.JOptionPane;
 import org.diegoauyon.bean.Categoria;
 import org.diegoauyon.bean.Marca;
@@ -359,4 +362,15 @@ public class ProductoController implements Initializable {
         cmbMarca.setValue(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getMarca());
         cmbTalla.setValue(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getTalla());
     }
+    
+    /* File Chooser */
+    
+    public void seleccionarArchivo() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        Window stage = null;
+        File file = fileChooser.showOpenDialog(stage);
+        txtImagen.setText(file.getAbsolutePath());
+    }
+    
 }
