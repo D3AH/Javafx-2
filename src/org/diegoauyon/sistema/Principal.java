@@ -14,6 +14,7 @@ import org.diegoauyon.controller.MenuPrincipalController;
 import org.diegoauyon.controller.CategoriaController;
 import org.diegoauyon.controller.MarcaController;
 import org.diegoauyon.controller.ProductoController;
+import org.diegoauyon.controller.TallaController;
     
 
 public class Principal extends Application {
@@ -56,6 +57,15 @@ public class Principal extends Application {
         try {
             MarcaController marcaController = (MarcaController) cambiarEscena("MarcaView.fxml");
             marcaController.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void ventanaTallas() {
+        try {
+            TallaController tallaController = (TallaController) cambiarEscena("TallaView.fxml");
+            tallaController.setEscenarioPrincipal(this);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegoauyon.controller.CategoriaController">
+<VBox prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegoauyon.controller.TallaController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -72,19 +72,19 @@
             </VBox>
             <VBox layoutX="267.0" layoutY="83.0" prefHeight="70.0" prefWidth="268.0">
                <children>
-                  <ComboBox fx:id="cmbCategoria" prefWidth="150.0">
+                  <ComboBox fx:id="cmbTalla" prefWidth="150.0">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <TextField fx:id="txtDescripcion" editable="false" promptText="Ingrese la descripcion de la categoria">
+                  <TextField fx:id="txtDescripcion" editable="false" promptText="Ingrese la descripcion de la talla">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </TextField>
                </children>
             </VBox>
-            <TableView fx:id="tblCategorias" layoutX="56.0" layoutY="176.0" prefHeight="183.0" prefWidth="529.0">
+            <TableView fx:id="tblTallas" layoutX="56.0" layoutY="176.0" prefHeight="183.0" prefWidth="529.0">
               <columns>
                 <TableColumn fx:id="colCodigo" prefWidth="75.0" text="Codigo" />
                 <TableColumn fx:id="colDescripcion" prefWidth="453.0" text="Descripcion" />

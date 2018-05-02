@@ -17,7 +17,7 @@
           <items>
             <MenuItem mnemonicParsing="false" onAction="#ventanaCategorias" text="Categorias" />
             <MenuItem mnemonicParsing="false" onAction="#ventanaMarcas" text="Marcas" />
-            <MenuItem mnemonicParsing="false" text="Tallas" />
+            <MenuItem mnemonicParsing="false" onAction="#ventanaTallas" text="Tallas" />
             <MenuItem mnemonicParsing="false" onAction="#ventanaProductos" text="Productos" />
             <MenuItem mnemonicParsing="false" text="Salir" />
           </items>

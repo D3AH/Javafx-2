@@ -34,4 +34,8 @@ public class MenuPrincipalController implements Initializable {
         escenarioPrincipal.ventanaProductos();
     }
     
+    public void ventanaTallas(){
+        escenarioPrincipal.ventanaTallas();
+    }
+    
 }
