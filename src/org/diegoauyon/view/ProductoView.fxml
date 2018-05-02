@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegoauyon.controller.ProductoController">
+<VBox prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegoauyon.controller.ProductoController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -99,17 +99,17 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <ComboBox fx:id="cmbCategoria" prefHeight="30.0" prefWidth="250.0">
+                  <ComboBox fx:id="cmbCategoria" disable="true" prefHeight="30.0" prefWidth="250.0">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <ComboBox fx:id="cmbMarca" prefHeight="30.0" prefWidth="250.0">
+                  <ComboBox fx:id="cmbMarca" disable="true" prefHeight="30.0" prefWidth="250.0">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <ComboBox fx:id="cmbTalla" prefHeight="30.0" prefWidth="250.0">
+                  <ComboBox fx:id="cmbTalla" disable="true" prefHeight="30.0" prefWidth="250.0">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -124,7 +124,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="btnFilePicker" mnemonicParsing="false" text="Button">
+                        <Button fx:id="btnFilePicker" disable="true" mnemonicParsing="false" text="Button">
                            <HBox.margin>
                               <Insets top="5.0" />
                            </HBox.margin>
