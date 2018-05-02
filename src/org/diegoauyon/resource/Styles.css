@@ -1,0 +1,25 @@
+.menu {
+    -fx-font-size: 10pt;
+    -fx-opacity: 1;
+}
+
+
+
+.menubar {
+    -fx-background-color: linear-gradient(to bottom right, #1f4a75, #dbc1a6);
+}
+/*
+contrusctores nulo, no nulo, etc
+un enumerado r es una clase espcial que limita la creacion de objetos
+a los especificados explicitamente en la implementacion de la clase la
+unica limitacion que tiene los enumeradores respecto a una clase normal
+es que este si tiene un constructor. 
+este debe ser privador para que no se puean crear nuevos objetos
+*/
+.menu .label {
+    -fx-text-fill: white;
+}
+
+.menu-item .label {
+    -fx-text-fill: black;
+}
