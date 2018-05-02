@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="567.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProductoController">
+<VBox prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProductoController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -57,14 +57,14 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="530.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="542.0" prefWidth="725.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label alignment="CENTER" layoutX="209.0" layoutY="14.0" prefHeight="43.0" prefWidth="223.0" text="Tabla Productos">
+            <Label alignment="CENTER" layoutX="264.0" layoutY="14.0" prefHeight="43.0" prefWidth="223.0" text="Tabla Productos">
                <font>
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Label>
-            <VBox layoutX="89.0" layoutY="57.0" prefHeight="200.0" prefWidth="100.0">
+            <VBox layoutX="64.0" layoutY="57.0" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label prefHeight="30.0" prefWidth="80.0" text="Descripcion">
                      <VBox.margin>
@@ -85,31 +85,31 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label prefHeight="30.0" prefWidth="80.0" text="Talla">
+                  <Label prefHeight="30.0" prefWidth="80.0" text="Imagen">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
                </children>
             </VBox>
-            <VBox layoutX="201.0" layoutY="57.0" prefHeight="200.0" prefWidth="250.0">
+            <VBox layoutX="176.0" layoutY="57.0" prefHeight="200.0" prefWidth="250.0">
                <children>
                   <TextField fx:id="txtDescripcion" editable="false" prefHeight="30.0" prefWidth="250.0" promptText="Ingrese la descripcion de la marca">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <ComboBox prefHeight="30.0" prefWidth="250.0">
+                  <ComboBox fx:id="cmbCategoria" prefHeight="30.0" prefWidth="250.0">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <ComboBox prefHeight="30.0" prefWidth="250.0">
+                  <ComboBox fx:id="cmbMarca" prefHeight="30.0" prefWidth="250.0">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <ComboBox prefHeight="30.0" prefWidth="250.0">
+                  <ComboBox fx:id="cmbTalla" prefHeight="30.0" prefWidth="250.0">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -119,12 +119,12 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                      <children>
-                        <TextField fx:id="txtDescripcion1" editable="false" prefHeight="30.0" prefWidth="250.0">
+                        <TextField fx:id="txtImagen" editable="false" prefHeight="30.0" prefWidth="250.0">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button mnemonicParsing="false" text="Button">
+                        <Button fx:id="btnFilePicker" mnemonicParsing="false" text="Button">
                            <HBox.margin>
                               <Insets top="5.0" />
                            </HBox.margin>
@@ -133,13 +133,20 @@
                   </HBox>
                </children>
             </VBox>
-            <TableView fx:id="tblMarcas" layoutX="56.0" layoutY="271.0" onKeyReleased="#seleccionarElemento" onMouseClicked="#seleccionarElemento" prefHeight="183.0" prefWidth="529.0">
+            <TableView fx:id="tblProducto" layoutX="18.0" layoutY="274.0" maxWidth="714.0" onKeyReleased="#seleccionarElemento" onMouseClicked="#seleccionarElemento" prefHeight="183.0" prefWidth="714.0">
               <columns>
-                <TableColumn fx:id="colCodigo" prefWidth="75.0" text="Codigo" />
-                <TableColumn fx:id="colDescripcion" prefWidth="453.0" text="Descripcion" />
+                <TableColumn fx:id="colCodigo" maxWidth="-1.0" minWidth="80.0" prefWidth="-1.0" text="Codigo" />
+                <TableColumn fx:id="colDescripcion" maxWidth="-1.0" minWidth="80.0" prefWidth="-1.0" text="Descripcion" />
+                  <TableColumn fx:id="colCategoria" maxWidth="-1.0" minWidth="80.0" prefWidth="-1.0" text="Categoria" />
+                  <TableColumn fx:id="colMarca" maxWidth="-1.0" minWidth="80.0" prefWidth="-1.0" text="Marca" />
+                  <TableColumn fx:id="colTalla" maxWidth="-1.0" minWidth="80.0" prefWidth="-1.0" text="Talla" />
+                  <TableColumn fx:id="colPrecioUnitario" maxWidth="-1.0" minWidth="80.0" prefWidth="-1.0" text="P. Unitario" />
+                  <TableColumn fx:id="colPrecioDocena" maxWidth="-1.0" minWidth="80.0" prefWidth="-1.0" text="P. Docena" />
+                  <TableColumn fx:id="colPrecioMayor" maxWidth="-1.0" minWidth="80.0" prefWidth="-1.0" text="P. Mayor" />
+                  <TableColumn fx:id="colExistencia" maxWidth="-1.0" minWidth="80.0" prefWidth="-1.0" text="Existencia" />
               </columns>
             </TableView>
-            <HBox layoutX="245.0" layoutY="477.0" prefHeight="43.0" prefWidth="340.0">
+            <HBox layoutX="375.0" layoutY="468.0" prefHeight="43.0" prefWidth="340.0">
                <children>
                   <Button fx:id="btnNuevo" mnemonicParsing="false" onAction="#nuevo" prefHeight="40.0" prefWidth="80.0" text="Nuevo">
                      <HBox.margin>
