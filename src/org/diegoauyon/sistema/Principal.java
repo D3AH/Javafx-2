@@ -73,7 +73,7 @@ public class Principal extends Application {
     
     public void ventanaProductos() {
         try {
-            ProductoController productoController = (ProductoController) cambiarEscena("ProductoView");
+            ProductoController productoController = (ProductoController) cambiarEscena("ProductoView.fxml");
             productoController.setEscenarioPrincipal(this);
         } catch (Exception e) {
             e.printStackTrace();
