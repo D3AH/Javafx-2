@@ -161,11 +161,13 @@ public class ClienteController implements Initializable{
             PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ActualizarCliente(?,?,?,?)}");
             Cliente registro = ((Cliente)tblClientes.getSelectionModel().getSelectedItem());
             registro.setNombre(txtNombre.getText());
-            registro.setDireccion(txtNombre.getText());
-            registro.setNit(txtNombre.getText());
+            registro.setDireccion(txtDireccion.getText());
+            registro.setNit(txtNit.getText());
             registro.setCodigoCliente(((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getCodigoCliente());
             procedimiento.setInt(1, registro.getCodigoCliente());
             procedimiento.setString(2, registro.getNombre());  
+            procedimiento.setString(3, registro.getDireccion());  
+            procedimiento.setString(4, registro.getNit());  
             procedimiento.execute();
         } catch (SQLException e) {
             e.printStackTrace();
