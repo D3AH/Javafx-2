@@ -228,7 +228,7 @@ public class MarcaController implements Initializable{
         cmbMarca.setValue(((Marca)tblMarcas.getSelectionModel().getSelectedItem()).getCodigoMarca());
     }
     
-    public Marca buscarMarca(int codigoMarca) {
+    public static Marca buscarMarca(int codigoMarca) {
         Marca objetoMarca = null;
         try {
             PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_BuscarMarca(?) }");

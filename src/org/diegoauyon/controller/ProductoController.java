@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +26,7 @@ import org.diegoauyon.bean.Marca;
 import org.diegoauyon.bean.Producto;
 import org.diegoauyon.bean.Talla;
 import org.diegoauyon.db.Conexion;
+import org.diegoauyon.reporte.GenerarReporte;
 import org.diegoauyon.sistema.Principal;
 
 public class ProductoController implements Initializable {
@@ -358,9 +360,11 @@ public class ProductoController implements Initializable {
     
     public void seleccionarElemento() {
         txtDescripcion.setText(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getDescripcion());
-        cmbCategoria.setValue(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getCategoria());
-        cmbMarca.setValue(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getMarca());
+//        cmbCategoria.setValue(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getCategoria());
+//        cmbMarca.setValue(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getMarca());
 //        cmbTalla.setValue(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getTalla());
+        cmbMarca.getSelectionModel().select(MarcaController.buscarMarca(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getCodigoMarca()));
+        cmbCategoria.getSelectionModel().select(CategoriaController.buscarCategoria(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getCodigoCategoria()));
         cmbTalla.getSelectionModel().select(TallaController.buscarTalla(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getCodigoTalla()));
     }
     
@@ -372,6 +376,32 @@ public class ProductoController implements Initializable {
         Window stage = null;
         File file = fileChooser.showOpenDialog(stage);
         txtImagen.setText(file.getAbsolutePath());
+    }
+    
+    /* Reporte */
+    
+    public void generarReporte() {
+        switch(tipoDeOperacion){
+            case NINGUNO:
+                imprimirReporte();
+                tipoDeOperacion = operaciones.ACTUALIZAR;
+                break;
+            case ACTUALIZAR:
+                btnEditar.setText("");
+                btnReporte.setText("");
+                tipoDeOperacion = operaciones.NINGUNO;
+                btnNuevo.setDisable(false);
+                btnEliminar.setDisable(false);
+                activarControles();
+        }
+    }
+    
+    public void imprimirReporte(){
+        HashMap parametros = new HashMap();
+        parametros.put("_NumeroDocumento", null);
+        GenerarReporte.mostrarReporte("ReporteProductos.jasper", "Reporte de Productos", parametros);
+        
+        
     }
     
 }

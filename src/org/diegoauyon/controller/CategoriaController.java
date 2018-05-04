@@ -228,7 +228,7 @@ public class CategoriaController implements Initializable{
         cmbCategoria.setValue(((Categoria)tblCategorias.getSelectionModel().getSelectedItem()).getCodigoCategoria());
     }
     
-    public Categoria buscarCategoria(int codigoCategoria) {
+    public static Categoria buscarCategoria(int codigoCategoria) {
         Categoria objetoCategoria = null;
         try {
             PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_BuscarCategoria(?) }");
