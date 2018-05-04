@@ -231,7 +231,7 @@ public class CategoriaController implements Initializable{
     public Categoria buscarCategoria(int codigoCategoria) {
         Categoria objetoCategoria = null;
         try {
-            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("call sp_BuscarCategoria(?)");
+            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_BuscarCategoria(?) }");
             procedimiento.setInt(1, codigoCategoria);
             ResultSet registro = procedimiento.executeQuery();
             while(registro.next()) {

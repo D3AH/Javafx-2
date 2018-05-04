@@ -82,7 +82,7 @@ public class Principal extends Application {
         }
     }
     
-    public void ventanaProveedor() {
+    public void ventanaProveedores() {
         try {
             ProveedorController tallaController = (ProveedorController) cambiarEscena("ProveedorView.fxml");
             tallaController.setEscenarioPrincipal(this);

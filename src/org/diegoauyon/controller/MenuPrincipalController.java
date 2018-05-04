@@ -42,8 +42,8 @@ public class MenuPrincipalController implements Initializable {
         escenarioPrincipal.ventanaClientes();
     }
     
-    public void ventanaProveedor(){
-        escenarioPrincipal.ventanaProveedor();
+    public void ventanaProveedores(){
+        escenarioPrincipal.ventanaProveedores();
     }
     
 }

@@ -173,14 +173,14 @@ public class ProductoController implements Initializable {
     public Producto buscarProducto(int codigoProducto) {
         Producto objetoProducto = null;
         try {
-            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("call sp_BuscarProducto(?)");
+            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_BuscarProducto(?) }");
             procedimiento.setInt(1, codigoProducto);
             ResultSet registro = procedimiento.executeQuery();
             while(registro.next()) {
                 objetoProducto = new Producto(registro.getInt("codigoProducto"),registro.getString("descripcion"),registro.getInt("existencia"),registro.getDouble("precioUnitario"),registro.getDouble("precioUnitario"),registro.getDouble("precioUnitario"),registro.getString("imagen"),registro.getInt("codigoCategoria"), registro.getString("categoria"), registro.getInt("codigoMarca"), registro.getString("marca"), registro.getInt("codigoTalla"), registro.getString("talla"));
             }
         } catch (SQLException e) {
-            
+            e.printStackTrace();
         }
         return objetoProducto;
     }
@@ -360,7 +360,8 @@ public class ProductoController implements Initializable {
         txtDescripcion.setText(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getDescripcion());
         cmbCategoria.setValue(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getCategoria());
         cmbMarca.setValue(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getMarca());
-        cmbTalla.setValue(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getTalla());
+//        cmbTalla.setValue(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getTalla());
+        cmbTalla.getSelectionModel().select(TallaController.buscarTalla(((Producto)tblProducto.getSelectionModel().getSelectedItem()).getCodigoTalla()));
     }
     
     /* File Chooser */

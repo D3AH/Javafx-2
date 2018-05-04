@@ -21,31 +21,39 @@ import javax.swing.JOptionPane;
 
 import org.diegoauyon.sistema.Principal;
 import org.diegoauyon.db.Conexion;
-import org.diegoauyon.bean.Cliente;
+import org.diegoauyon.bean.Proveedor;
 
 public class ProveedorController implements Initializable{
     private Principal escenarioPrincipal;
     private enum operaciones{NUEVO, GUARDAR, ELIMINAR, EDITAR, ACTUALIZAR, CANCELAR, NINGUNO};
     private operaciones tipoDeOperacion = operaciones.NINGUNO;
-    private ObservableList<Cliente> listaCliente;
+    private ObservableList<Proveedor> listaProveedor;
     
-    @FXML private ComboBox cmbCliente;
+    @FXML private ComboBox cmbProveedor;
     
-    @FXML private TextField txtNombre;
+    @FXML private TextField txtContactoPrincipal;
     
-    @FXML private TextField txtDireccion;
+    @FXML private TextField txtRazonSocial;
     
     @FXML private TextField txtNit;
     
-    @FXML private TableView tblClientes;
+    @FXML private TextField txtPaginaWeb;
+    
+    @FXML private TextField txtDireccion;
+    
+    @FXML private TableView tblProveedores;
     
     @FXML private TableColumn colCodigo;
     
-    @FXML private TableColumn colNombre;
+    @FXML private TableColumn colContactoPrincipal;
     
-    @FXML private TableColumn colDireccion;
+    @FXML private TableColumn colRazonSocial;
     
     @FXML private TableColumn colNit;
+    
+    @FXML private TableColumn colPaginaWeb;
+    
+    @FXML private TableColumn colDireccion;
     
     @FXML private Button btnNuevo;
     
@@ -111,17 +119,19 @@ public class ProveedorController implements Initializable{
     public void editar() {
         switch(tipoDeOperacion){
             case NINGUNO:
-                if(tblClientes.getSelectionModel().getSelectedItem() != null) {
+                if(tblProveedores.getSelectionModel().getSelectedItem() != null) {
                     btnEditar.setText("Actualizar");
                     btnReporte.setText("Cancelar");
                     tipoDeOperacion = operaciones.ACTUALIZAR;
                     btnNuevo.setDisable(true);
                     btnEliminar.setDisable(true);
-                    txtNombre.setEditable(true);
+                    txtContactoPrincipal.setEditable(true);
                     txtDireccion.setEditable(true);
                     txtNit.setEditable(true);
+                    txtDireccion.setEditable(true);
+                    txtPaginaWeb.setEditable(true);
                 } else {
-                    JOptionPane.showMessageDialog(null,"Debe seleccionar una cliente.");
+                    JOptionPane.showMessageDialog(null,"Debe seleccionar una proveedor.");
                 }
                 break;
             case ACTUALIZAR:
@@ -140,17 +150,21 @@ public class ProveedorController implements Initializable{
     /* Funciones de botones */
 
     public void agregar() {
-        Cliente registro = new Cliente();
-        registro.setNombre(txtNombre.getText());
+        Proveedor registro = new Proveedor();
+        registro.setContactoPrincipal(txtContactoPrincipal.getText());
         registro.setDireccion(txtDireccion.getText());
         registro.setNit(txtNit.getText());
+        registro.setRazonSocial(txtRazonSocial.getText());
+        registro.setPaginaWeb(txtPaginaWeb.getText());
         try {
-            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_AgregarCliente(?)}");
-            procedimiento.setString(1, registro.getNombre());
-            procedimiento.setString(2, registro.getDireccion());
+            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_AgregarProveedor(?,?,?,?,?)}");
+            procedimiento.setString(1, registro.getContactoPrincipal());
+            procedimiento.setString(2, registro.getRazonSocial());
             procedimiento.setString(3, registro.getNit());
+            procedimiento.setString(4, registro.getPaginaWeb());
+            procedimiento.setString(5, registro.getDireccion());
             procedimiento.execute();
-            listaCliente.add(registro);
+            listaProveedor.add(registro);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -158,14 +172,20 @@ public class ProveedorController implements Initializable{
     
     public void actualizar() {
         try {
-            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ActualizarCliente(?,?)}");
-            Cliente registro = ((Cliente)tblClientes.getSelectionModel().getSelectedItem());
-            registro.setNombre(txtNombre.getText());
-            registro.setDireccion(txtNombre.getText());
-            registro.setNit(txtNombre.getText());
-            registro.setCodigoCliente(((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getCodigoCliente());
-            procedimiento.setInt(1, registro.getCodigoCliente());
-            procedimiento.setString(2, registro.getNombre());  
+            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ActualizarProveedor(?,?,?,?,?,?)}");
+            Proveedor registro = ((Proveedor)tblProveedores.getSelectionModel().getSelectedItem());
+            registro.setContactoPrincipal(txtContactoPrincipal.getText());
+            registro.setDireccion(txtDireccion.getText());
+            registro.setRazonSocial(txtRazonSocial.getText());
+            registro.setPaginaWeb(txtPaginaWeb.getText());
+            registro.setNit(txtNit.getText());
+            registro.setCodigoProveedor(((Proveedor)tblProveedores.getSelectionModel().getSelectedItem()).getCodigoProveedor());
+            procedimiento.setInt(1, registro.getCodigoProveedor());
+            procedimiento.setString(2, registro.getContactoPrincipal());  
+            procedimiento.setString(3, registro.getDireccion());  
+            procedimiento.setString(4, registro.getRazonSocial());  
+            procedimiento.setString(5, registro.getPaginaWeb());  
+            procedimiento.setString(6, registro.getNit());  
             procedimiento.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -184,14 +204,14 @@ public class ProveedorController implements Initializable{
                 tipoDeOperacion = operaciones.NINGUNO;
                 break;
             default:
-                if(tblClientes.getSelectionModel().getSelectedItem() != null) {
+                if(tblProveedores.getSelectionModel().getSelectedItem() != null) {
                     int respuesta = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar el registro?","Confirmacion de eliminacion",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if( respuesta == JOptionPane.YES_OPTION) {
                         try {
-                            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_EliminarCliente(?)}");
-                            procedimiento.setInt(1, ((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getCodigoCliente());
+                            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_EliminarProveedor(?)}");
+                            procedimiento.setInt(1, ((Proveedor)tblProveedores.getSelectionModel().getSelectedItem()).getCodigoProveedor());
                             procedimiento.execute();
-                            listaCliente.remove(tblClientes.getSelectionModel().getSelectedIndex());
+                            listaProveedor.remove(tblProveedores.getSelectionModel().getSelectedIndex());
                             limpiarControles();
                             cargarDatos();
                         } catch (SQLException e) {
@@ -199,7 +219,7 @@ public class ProveedorController implements Initializable{
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null,"Debe seleccionar una cliente.");
+                    JOptionPane.showMessageDialog(null,"Debe seleccionar una proveedor.");
                 }
         }
     }
@@ -207,72 +227,82 @@ public class ProveedorController implements Initializable{
         /* Controles */
     
     public void desactivarControles() {
-        txtNombre.setEditable(false);
+        txtContactoPrincipal.setEditable(false);
         txtDireccion.setEditable(false);
         txtNit.setEditable(false);
-        cmbCliente.setDisable(true);
+        txtRazonSocial.setEditable(false);
+        txtPaginaWeb.setEditable(false);
+        cmbProveedor.setDisable(true);
     }
     
     public void activarControles() {
-        txtNombre.setEditable(true);
+        txtContactoPrincipal.setEditable(true);
         txtDireccion.setEditable(true);
+        txtRazonSocial.setEditable(true);
+        txtPaginaWeb.setEditable(true);
         txtNit.setEditable(true);
-        cmbCliente.setDisable(true);
+        cmbProveedor.setDisable(true);
     }
     
     public void limpiarControles() {
-        txtNombre.setText("");
+        txtContactoPrincipal.setText("");
         txtDireccion.setText("");
         txtNit.setText("");
-        cmbCliente.setValue("");
+        txtRazonSocial.setText("");
+        txtPaginaWeb.setText("");
+        cmbProveedor.setValue("");
     }    
         
     /* Funciones de TableView */
     
     public void cargarDatos() {
-        tblClientes.setItems(getClientes());
-        colCodigo.setCellValueFactory(new PropertyValueFactory<Cliente,Integer>("codigoCliente"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<Cliente,String>("nombre"));
-        colDireccion.setCellValueFactory(new PropertyValueFactory<Cliente,String>("direccion"));
-        colNit.setCellValueFactory(new PropertyValueFactory<Cliente,String>("nit"));
+        tblProveedores.setItems(getProveedores());
+        colCodigo.setCellValueFactory(new PropertyValueFactory<Proveedor,Integer>("codigoProveedor"));
+        colContactoPrincipal.setCellValueFactory(new PropertyValueFactory<Proveedor,String>("contactoPrincipal"));
+        colRazonSocial.setCellValueFactory(new PropertyValueFactory<Proveedor,String>("razonSocial"));
+        colPaginaWeb.setCellValueFactory(new PropertyValueFactory<Proveedor,String>("paginaWeb"));
+        colDireccion.setCellValueFactory(new PropertyValueFactory<Proveedor,String>("direccion"));
+        colNit.setCellValueFactory(new PropertyValueFactory<Proveedor,String>("nit"));
     }
     
     public void seleccionarElemento() {
-        cmbCliente.setValue(((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getCodigoCliente());
-        txtNombre.setText(((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getNombre());
-        txtDireccion.setText(((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getDireccion());
-        txtNit.setText(((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getNit());
+        cmbProveedor.setValue(((Proveedor)tblProveedores.getSelectionModel().getSelectedItem()).getCodigoProveedor());
+        txtContactoPrincipal.setText(((Proveedor)tblProveedores.getSelectionModel().getSelectedItem()).getContactoPrincipal());
+        txtPaginaWeb.setText(((Proveedor)tblProveedores.getSelectionModel().getSelectedItem()).getPaginaWeb());
+        txtRazonSocial.setText(((Proveedor)tblProveedores.getSelectionModel().getSelectedItem()).getRazonSocial());
+        txtDireccion.setText(((Proveedor)tblProveedores.getSelectionModel().getSelectedItem()).getDireccion());
+        txtNit.setText(((Proveedor)tblProveedores.getSelectionModel().getSelectedItem()).getNit());
         
     }
     
-    public Cliente buscarCliente(int codigoCliente) {
-        Cliente objetoCliente = null;
+    public Proveedor buscarProveedor(int codigoProveedor) {
+        Proveedor objetoProveedor = null;
         try {
-            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("call sp_BuscarCliente(?)");
-            procedimiento.setInt(1, codigoCliente);
+            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_BuscarProveedor(?) }");
+            procedimiento.setInt(1, codigoProveedor);
             ResultSet registro = procedimiento.executeQuery();
             while(registro.next()) {
-                objetoCliente = new Cliente(registro.getInt("codigoCliente"),registro.getString("nombre"),registro.getString("direccion"),registro.getString("nit"));
+                objetoProveedor = new Proveedor(registro.getInt("codigoProveedor"),registro.getString("contactoPrincipal"),registro.getString("razonSocial"),registro.getString("nit"),registro.getString("paginaWeb"),registro.getString("direccion"));
             }
         } catch (SQLException e) {
             
         }
-        return objetoCliente;
+        return objetoProveedor;
     }
     
-    public ObservableList<Cliente> getClientes() {
-        ArrayList<Cliente> lista = new ArrayList<Cliente>();
+    public ObservableList<Proveedor> getProveedores() {
+        ArrayList<Proveedor> lista = new ArrayList<Proveedor>();
         try {
             PreparedStatement procedimiento;
-            procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ListarClientes}");
+            procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ListarProveedores}");
             ResultSet resultado = procedimiento.executeQuery();
             while(resultado.next()){
-                lista.add(new Cliente(resultado.getInt("codigoCliente"),resultado.getString("nombre"),resultado.getString("direccion"), resultado.getString("nit")));
+                lista.add(new Proveedor(resultado.getInt("codigoProveedor"),resultado.getString("contactoPrincipal"),resultado.getString("razonSocial"),resultado.getString("nit"),resultado.getString("paginaWeb"),resultado.getString("direccion")));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         
-        return listaCliente = FXCollections.observableArrayList(lista);
+        return listaProveedor = FXCollections.observableArrayList(lista);
     }
 }

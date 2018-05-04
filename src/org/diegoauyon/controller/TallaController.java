@@ -228,17 +228,17 @@ public class TallaController implements Initializable{
         cmbTalla.setValue(((Talla)tblTallas.getSelectionModel().getSelectedItem()).getCodigoTalla());
     }
     
-    public Talla buscarTalla(int codigoTalla) {
+    public static Talla buscarTalla(int codigoTalla) {
         Talla objetoTalla = null;
         try {
-            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("call sp_BuscarTalla(?)");
+            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_BuscarTalla(?) }");
             procedimiento.setInt(1, codigoTalla);
             ResultSet registro = procedimiento.executeQuery();
             while(registro.next()) {
                 objetoTalla = new Talla(registro.getInt("codigoTalla"),registro.getString("descripcion"));
             }
         } catch (SQLException e) {
-            
+            e.printStackTrace();
         }
         return objetoTalla;
     }

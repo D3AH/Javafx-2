@@ -6,18 +6,18 @@ public class Proveedor {
     private String razonSocial;
     private String nit;
     private String paginaWeb;
-    private String dirreccion;
+    private String direccion;
 
     public Proveedor() {
     }
 
-    public Proveedor(int codigoProveedor, String contactoPrincipal, String razonSocial, String nit, String paginaWeb, String dirreccion) {
+    public Proveedor(int codigoProveedor, String contactoPrincipal, String razonSocial, String nit, String paginaWeb, String direccion) {
         this.codigoProveedor = codigoProveedor;
         this.contactoPrincipal = contactoPrincipal;
         this.razonSocial = razonSocial;
         this.nit = nit;
         this.paginaWeb = paginaWeb;
-        this.dirreccion = dirreccion;
+        this.direccion = direccion;
     }
 
     public int getCodigoProveedor() {
@@ -60,12 +60,12 @@ public class Proveedor {
         this.paginaWeb = paginaWeb;
     }
 
-    public String getDirreccion() {
-        return dirreccion;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setDirreccion(String dirreccion) {
-        this.dirreccion = dirreccion;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
     
     public String toString() {

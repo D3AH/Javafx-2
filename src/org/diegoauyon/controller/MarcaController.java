@@ -231,7 +231,7 @@ public class MarcaController implements Initializable{
     public Marca buscarMarca(int codigoMarca) {
         Marca objetoMarca = null;
         try {
-            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("call sp_BuscarMarca(?)");
+            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_BuscarMarca(?) }");
             procedimiento.setInt(1, codigoMarca);
             ResultSet registro = procedimiento.executeQuery();
             while(registro.next()) {

@@ -250,7 +250,7 @@ public class ClienteController implements Initializable{
     public Cliente buscarCliente(int codigoCliente) {
         Cliente objetoCliente = null;
         try {
-            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("call sp_BuscarCliente(?)");
+            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_BuscarCliente(?) }");
             procedimiento.setInt(1, codigoCliente);
             ResultSet registro = procedimiento.executeQuery();
             while(registro.next()) {
