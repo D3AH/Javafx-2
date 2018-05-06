@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.layout.AnchorPane;
 /* Proyect's Class */
 import org.diegoauyon.controller.MenuPrincipalController;
 import org.diegoauyon.controller.CategoriaController;
