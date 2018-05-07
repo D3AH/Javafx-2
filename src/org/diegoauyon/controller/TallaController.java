@@ -69,6 +69,10 @@ public class TallaController implements Initializable{
         this.escenarioPrincipal = escenarioPrincipal;
     }
     
+    public void menuPrincipal() {
+        escenarioPrincipal.menuPrincipal();
+    }
+    
     /* Botones */
     
     public void nuevo() {

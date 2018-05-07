@@ -95,6 +95,10 @@ public class ProductoController implements Initializable {
         return escenarioPrincipal;
     }
     
+    public void menuPrincipal() {
+        escenarioPrincipal.menuPrincipal();
+    }
+    
     public void cargarDatos() {
         tblProducto.setItems(getProductos());
         colCodigo.setCellValueFactory(new PropertyValueFactory<Producto,Integer>("codigoProducto"));

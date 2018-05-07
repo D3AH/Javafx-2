@@ -68,6 +68,10 @@ public class ClienteController implements Initializable{
         this.escenarioPrincipal = escenarioPrincipal;
     }
     
+    public void menuPrincipal() {
+        escenarioPrincipal.menuPrincipal();
+    }
+    
     /* Botones */
     
     public void nuevo() {
