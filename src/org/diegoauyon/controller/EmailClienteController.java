@@ -18,46 +18,56 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
+import org.diegoauyon.bean.Cliente;
 
 import org.diegoauyon.sistema.Principal;
 import org.diegoauyon.db.Conexion;
-import org.diegoauyon.bean.Cliente;
+import org.diegoauyon.bean.EmailCliente;
 
-public class ClienteController implements Initializable{
+public class EmailClienteController implements Initializable{
     private Principal escenarioPrincipal;
     private enum operaciones{NUEVO, GUARDAR, ELIMINAR, EDITAR, ACTUALIZAR, CANCELAR, NINGUNO};
     private operaciones tipoDeOperacion = operaciones.NINGUNO;
+    private ObservableList<EmailCliente> listaEmailCliente;
     private ObservableList<Cliente> listaCliente;
     
-    @FXML private ComboBox cmbCliente;
+    @FXML
+    private TextField txtDescripcion;
     
-    @FXML private TextField txtNombre;
+    @FXML
+    private TextField txtEmail;
     
-    @FXML private TextField txtDireccion;
+    @FXML
+    private ComboBox cmbCliente;
     
-    @FXML private TextField txtNit;
+    @FXML
+    private TableView tblEmailCliente;
     
-    @FXML private TableView tblClientes;
+    @FXML
+    private TableColumn colCodigo;
     
-    @FXML private TableColumn colCodigo;
+    @FXML
+    private TableColumn colDescripcion;
     
-    @FXML private TableColumn colNombre;
+    @FXML
+    private TableColumn colEmail;
     
-    @FXML private TableColumn colDireccion;
+    @FXML
+    private Button btnNuevo;
     
-    @FXML private TableColumn colNit;
+    @FXML
+    private Button btnEliminar;
     
-    @FXML private Button btnNuevo;
+    @FXML
+    private Button btnEditar;
     
-    @FXML private Button btnEliminar;
-    
-    @FXML private Button btnEditar;
-    
-    @FXML private Button btnReporte;
+    @FXML
+    private Button btnReporte;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cargarDatos();
+        cmbCliente.setItems(getClientees());
     }
 
     public Principal getEscenarioPrincipal() {
@@ -115,17 +125,16 @@ public class ClienteController implements Initializable{
     public void editar() {
         switch(tipoDeOperacion){
             case NINGUNO:
-                if(tblClientes.getSelectionModel().getSelectedItem() != null) {
+                if(tblEmailCliente.getSelectionModel().getSelectedItem() != null) {
                     btnEditar.setText("Actualizar");
                     btnReporte.setText("Cancelar");
                     tipoDeOperacion = operaciones.ACTUALIZAR;
                     btnNuevo.setDisable(true);
                     btnEliminar.setDisable(true);
-                    txtNombre.setEditable(true);
-                    txtDireccion.setEditable(true);
-                    txtNit.setEditable(true);
+                    txtDescripcion.setEditable(true);
+                    activarControles();
                 } else {
-                    JOptionPane.showMessageDialog(null,"Debe seleccionar una cliente.");
+                    JOptionPane.showMessageDialog(null,"Debe seleccionar una telefono.");
                 }
                 break;
             case ACTUALIZAR:
@@ -144,17 +153,17 @@ public class ClienteController implements Initializable{
     /* Funciones de botones */
 
     public void agregar() {
-        Cliente registro = new Cliente();
-        registro.setNombre(txtNombre.getText());
-        registro.setDireccion(txtDireccion.getText());
-        registro.setNit(txtNit.getText());
+        EmailCliente registro = new EmailCliente();
+        registro.setDescripcion(txtDescripcion.getText());
+        registro.setEmail(txtEmail.getText());
+        registro.setCodigoCliente(((Cliente)cmbCliente.getSelectionModel().getSelectedItem()).getCodigoCliente());
         try {
-            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_AgregarCliente(?,?,?)}");
-            procedimiento.setString(1, registro.getNombre());
-            procedimiento.setString(2, registro.getDireccion());
-            procedimiento.setString(3, registro.getNit());
+            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_AgregarEmailCliente(?,?,?)}");
+            procedimiento.setString(1, registro.getDescripcion());
+            procedimiento.setString(2, registro.getEmail());
+            procedimiento.setInt(3, registro.getCodigoCliente());
             procedimiento.execute();
-            listaCliente.add(registro);
+            listaEmailCliente.add(registro);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -162,16 +171,16 @@ public class ClienteController implements Initializable{
     
     public void actualizar() {
         try {
-            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ActualizarCliente(?,?,?,?)}");
-            Cliente registro = ((Cliente)tblClientes.getSelectionModel().getSelectedItem());
-            registro.setNombre(txtNombre.getText());
-            registro.setDireccion(txtDireccion.getText());
-            registro.setNit(txtNit.getText());
-            registro.setCodigoCliente(((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getCodigoCliente());
-            procedimiento.setInt(1, registro.getCodigoCliente());
-            procedimiento.setString(2, registro.getNombre());  
-            procedimiento.setString(3, registro.getDireccion());  
-            procedimiento.setString(4, registro.getNit());  
+            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ActualizarEmailCliente(?,?,?,?)}");
+            EmailCliente registro = ((EmailCliente)tblEmailCliente.getSelectionModel().getSelectedItem());
+            registro.setDescripcion(txtDescripcion.getText());
+            registro.setEmail(txtEmail.getText());
+            registro.setCodigoCliente(((Cliente)cmbCliente.getSelectionModel().getSelectedItem()).getCodigoCliente());
+            registro.setCodigoEmailCliente(((EmailCliente)tblEmailCliente.getSelectionModel().getSelectedItem()).getCodigoEmailCliente());
+            procedimiento.setInt(1, registro.getCodigoEmailCliente());
+            procedimiento.setString(2, registro.getDescripcion());
+            procedimiento.setString(3, registro.getEmail());
+            procedimiento.setInt(4, registro.getCodigoCliente());
             procedimiento.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -190,14 +199,14 @@ public class ClienteController implements Initializable{
                 tipoDeOperacion = operaciones.NINGUNO;
                 break;
             default:
-                if(tblClientes.getSelectionModel().getSelectedItem() != null) {
+                if(tblEmailCliente.getSelectionModel().getSelectedItem() != null) {
                     int respuesta = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar el registro?","Confirmacion de eliminacion",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if( respuesta == JOptionPane.YES_OPTION) {
                         try {
-                            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_EliminarCliente(?)}");
-                            procedimiento.setInt(1, ((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getCodigoCliente());
+                            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_EliminarEmailCliente(?)}");
+                            procedimiento.setInt(1, ((EmailCliente)tblEmailCliente.getSelectionModel().getSelectedItem()).getCodigoEmailCliente());
                             procedimiento.execute();
-                            listaCliente.remove(tblClientes.getSelectionModel().getSelectedIndex());
+                            listaEmailCliente.remove(tblEmailCliente.getSelectionModel().getSelectedIndex());
                             limpiarControles();
                             cargarDatos();
                         } catch (SQLException e) {
@@ -205,7 +214,7 @@ public class ClienteController implements Initializable{
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null,"Debe seleccionar una cliente.");
+                    JOptionPane.showMessageDialog(null,"Debe seleccionar una telefono.");
                 }
         }
     }
@@ -213,42 +222,51 @@ public class ClienteController implements Initializable{
         /* Controles */
     
     public void desactivarControles() {
-        txtNombre.setEditable(false);
-        txtDireccion.setEditable(false);
-        txtNit.setEditable(false);
+        txtDescripcion.setEditable(false);
+        txtEmail.setEditable(false);
         cmbCliente.setDisable(true);
     }
     
     public void activarControles() {
-        txtNombre.setEditable(true);
-        txtDireccion.setEditable(true);
-        txtNit.setEditable(true);
-        cmbCliente.setDisable(true);
+        txtDescripcion.setEditable(true);
+        txtEmail.setEditable(true);
+        cmbCliente.setDisable(false);
     }
     
     public void limpiarControles() {
-        txtNombre.setText("");
-        txtDireccion.setText("");
-        txtNit.setText("");
+        txtDescripcion.setText("");
+        txtEmail.setText("");
         cmbCliente.setValue("");
     }    
         
     /* Funciones de TableView */
     
     public void cargarDatos() {
-        tblClientes.setItems(getClientes());
-        colCodigo.setCellValueFactory(new PropertyValueFactory<Cliente,Integer>("codigoCliente"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<Cliente,String>("nombre"));
-        colDireccion.setCellValueFactory(new PropertyValueFactory<Cliente,String>("direccion"));
-        colNit.setCellValueFactory(new PropertyValueFactory<Cliente,String>("nit"));
+        tblEmailCliente.setItems(getEmailCliente());
+        colCodigo.setCellValueFactory(new PropertyValueFactory<EmailCliente,Integer>("codigoCliente"));
+        colDescripcion.setCellValueFactory(new PropertyValueFactory<EmailCliente,String>("descripcion"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<EmailCliente,String>("email"));
     }
     
     public void seleccionarElemento() {
-        cmbCliente.setValue(((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getCodigoCliente());
-        txtNombre.setText(((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getNombre());
-        txtDireccion.setText(((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getDireccion());
-        txtNit.setText(((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getNit());
-        
+        cmbCliente.getSelectionModel().select(buscarCliente(((EmailCliente)tblEmailCliente.getSelectionModel().getSelectedItem()).getCodigoCliente()));
+        txtDescripcion.setText(((EmailCliente)tblEmailCliente.getSelectionModel().getSelectedItem()).getDescripcion());
+        txtEmail.setText(((EmailCliente)tblEmailCliente.getSelectionModel().getSelectedItem()).getEmail());
+    }
+    
+    public static EmailCliente buscarEmailCliente(int codigoEmailCliente) {
+        EmailCliente objetoEmailCliente = null;
+        try {
+            PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_BuscarEmailCliente(?) }");
+            procedimiento.setInt(1, codigoEmailCliente);
+            ResultSet registro = procedimiento.executeQuery();
+            while(registro.next()) {
+                objetoEmailCliente = new EmailCliente(registro.getInt("codigoEmailCliente"),registro.getString("descripcion"),registro.getString("email"),registro.getInt("codigoCliente"));
+            }
+        } catch (SQLException e) {
+            
+        }
+        return objetoEmailCliente;
     }
     
     public Cliente buscarCliente(int codigoCliente) {
@@ -266,14 +284,32 @@ public class ClienteController implements Initializable{
         return objetoCliente;
     }
     
-    public ObservableList<Cliente> getClientes() {
+    public ObservableList<EmailCliente> getEmailCliente() {
+        ArrayList<EmailCliente> lista = new ArrayList<EmailCliente>();
+        try {
+            PreparedStatement procedimiento;
+            procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ListarEmailCliente}");
+            ResultSet resultado = procedimiento.executeQuery();
+            while(resultado.next()){
+                lista.add(new EmailCliente(resultado.getInt("codigoEmailCliente"),resultado.getString("descripcion"),resultado.getString("email"),resultado.getInt("codigoCliente")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return listaEmailCliente = FXCollections.observableArrayList(lista);
+    }
+    
+    
+    
+    public ObservableList<Cliente> getClientees() {
         ArrayList<Cliente> lista = new ArrayList<Cliente>();
         try {
             PreparedStatement procedimiento;
-            procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ListarClientes}");
+            procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ListarClientees}");
             ResultSet resultado = procedimiento.executeQuery();
             while(resultado.next()){
-                lista.add(new Cliente(resultado.getInt("codigoCliente"),resultado.getString("nombre"),resultado.getString("direccion"), resultado.getString("nit")));
+                lista.add(new Cliente(resultado.getInt("codigoCliente"),resultado.getString("contactoPrincipal"),resultado.getString("razonSocial"),resultado.getString("nit"),resultado.getString("paginaWeb"),resultado.getString("direccion")));
             }
         } catch (Exception e) {
             e.printStackTrace();
