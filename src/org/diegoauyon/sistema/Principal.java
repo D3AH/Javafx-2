@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import org.diegoauyon.controller.MenuPrincipalController;
 import org.diegoauyon.controller.CategoriaController;
 import org.diegoauyon.controller.ClienteController;
+import org.diegoauyon.controller.EmailProveedorController;
 import org.diegoauyon.controller.MarcaController;
 import org.diegoauyon.controller.ProductoController;
 import org.diegoauyon.controller.ProveedorController;
@@ -102,8 +103,17 @@ public class Principal extends Application {
     
     public void ventanaTelefonoProveedores() {
         try {
-            TelefonoProveedorController tallaController = (TelefonoProveedorController) cambiarEscena("TelefonoProveedorView.fxml");
-            tallaController.setEscenarioPrincipal(this);
+            TelefonoProveedorController telefonoProveedorController = (TelefonoProveedorController) cambiarEscena("TelefonoProveedorView.fxml");
+            telefonoProveedorController.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void ventanaEmailProveedores() {
+        try {
+            EmailProveedorController emailProveedorController = (EmailProveedorController) cambiarEscena("EmailProveedorView.fxml");
+            emailProveedorController.setEscenarioPrincipal(this);
         } catch (Exception e) {
             e.printStackTrace();
         }

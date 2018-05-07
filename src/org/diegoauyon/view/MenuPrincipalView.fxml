@@ -21,7 +21,8 @@
             <MenuItem mnemonicParsing="false" onAction="#ventanaProductos" text="Productos" />
             <MenuItem mnemonicParsing="false" onAction="#ventanaClientes" text="Cliente" />
             <MenuItem mnemonicParsing="false" onAction="#ventanaProveedores" text="Proveedor" />
-                  <MenuItem mnemonicParsing="false" onAction="#ventanaTelefonoProveedores" text="Telefono Proveedor" />
+            <MenuItem mnemonicParsing="false" onAction="#ventanaTelefonoProveedores" text="Telefono Proveedor" />
+            <MenuItem mnemonicParsing="false" onAction="#ventanaEmailProveedores" text="Email Proveedor" />
             <MenuItem mnemonicParsing="false" text="Salir" />
           </items>
         </Menu>

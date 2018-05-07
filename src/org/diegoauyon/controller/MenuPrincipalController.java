@@ -50,4 +50,8 @@ public class MenuPrincipalController implements Initializable {
         escenarioPrincipal.ventanaTelefonoProveedores();
     }
     
+    public void ventanaEmailProveedores(){
+        escenarioPrincipal.ventanaEmailProveedores();
+    }
+    
 }
