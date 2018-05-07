@@ -73,7 +73,7 @@
             </VBox>
             <VBox layoutX="267.0" layoutY="83.0" prefHeight="119.0" prefWidth="268.0">
                <children>
-                  <ComboBox fx:id="cmbTelefonoProveedor" disable="true" prefWidth="150.0" promptText="Codigo proveedor">
+                  <ComboBox fx:id="cmbProveedor" disable="true" prefWidth="150.0" promptText="Codigo proveedor">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>

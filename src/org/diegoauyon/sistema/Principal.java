@@ -16,6 +16,7 @@ import org.diegoauyon.controller.MarcaController;
 import org.diegoauyon.controller.ProductoController;
 import org.diegoauyon.controller.ProveedorController;
 import org.diegoauyon.controller.TallaController;
+import org.diegoauyon.controller.TelefonoProveedorController;
     
 
 public class Principal extends Application {
@@ -81,6 +82,15 @@ public class Principal extends Application {
         }
     }
     
+    public void ventanaProductos() {
+        try {
+            ProductoController productoController = (ProductoController) cambiarEscena("ProductoView.fxml");
+            productoController.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void ventanaProveedores() {
         try {
             ProveedorController tallaController = (ProveedorController) cambiarEscena("ProveedorView.fxml");
@@ -90,10 +100,10 @@ public class Principal extends Application {
         }
     }
     
-    public void ventanaProductos() {
+    public void ventanaTelefonoProveedores() {
         try {
-            ProductoController productoController = (ProductoController) cambiarEscena("ProductoView.fxml");
-            productoController.setEscenarioPrincipal(this);
+            TelefonoProveedorController tallaController = (TelefonoProveedorController) cambiarEscena("TelefonoProveedorView.fxml");
+            tallaController.setEscenarioPrincipal(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
