@@ -28,12 +28,18 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Clientes">
                     <items>
-                  <MenuItem mnemonicParsing="false" onAction="#ventanaClientes" text="Cliente" />
+                        <MenuItem mnemonicParsing="false" onAction="#ventanaClientes" text="Cliente" />
                         <MenuItem mnemonicParsing="false" onAction="#ventanaTelefonoClientes" text="Telefono Cliente" />
                         <MenuItem mnemonicParsing="false" onAction="#ventanaEmailClientes" text="Email Cliente" />
                     </items>
                   </Menu>
-            <MenuItem mnemonicParsing="false" text="Salir" />
+                  <Menu mnemonicParsing="false" text="Facturas">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#ventanaFacturas" text="Factura" />
+                        <MenuItem mnemonicParsing="false" text="Detalle Factura" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" text="Salir" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Reportes">
@@ -68,3 +74,4 @@
     </AnchorPane>
   </children>
 </VBox>
+

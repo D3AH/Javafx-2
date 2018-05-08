@@ -62,4 +62,8 @@ public class MenuPrincipalController implements Initializable {
         escenarioPrincipal.ventanaEmailClientes();
     }
     
+    public void ventanaFacturas(){
+        escenarioPrincipal.ventanaFacturas();
+    }
+    
 }

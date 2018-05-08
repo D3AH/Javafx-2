@@ -14,6 +14,7 @@ import org.diegoauyon.controller.CategoriaController;
 import org.diegoauyon.controller.ClienteController;
 import org.diegoauyon.controller.EmailClienteController;
 import org.diegoauyon.controller.EmailProveedorController;
+import org.diegoauyon.controller.FacturaController;
 import org.diegoauyon.controller.MarcaController;
 import org.diegoauyon.controller.ProductoController;
 import org.diegoauyon.controller.ProveedorController;
@@ -134,6 +135,15 @@ public class Principal extends Application {
         try {
             EmailClienteController emailClienteController = (EmailClienteController) cambiarEscena("EmailClienteView.fxml");
             emailClienteController.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void ventanaFacturas() {
+        try {
+            FacturaController facturaController = (FacturaController) cambiarEscena("FacturaView.fxml");
+            facturaController.setEscenarioPrincipal(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
