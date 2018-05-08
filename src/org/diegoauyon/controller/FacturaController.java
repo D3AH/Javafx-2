@@ -130,6 +130,7 @@ public class FacturaController implements Initializable {
                 btnEliminar.setText("Eliminar");
                 btnEditar.setDisable(false);
                 btnReporte.setDisable(false);
+                dateFecha.setDisable(true);
                 tipoDeOperacion = operaciones.NINGUNO;
                 break;
         }
@@ -254,7 +255,7 @@ public class FacturaController implements Initializable {
     public void activarControles() {
         txtEstado.setEditable(true);
         txtNit.setEditable(true);
-        dateFecha.setEditable(true);
+        dateFecha.setDisable(false);
         cmbCliente.setDisable(false);
     }
     
@@ -270,6 +271,7 @@ public class FacturaController implements Initializable {
         txtNit.setEditable(false);
         dateFecha.setEditable(false);
         cmbCliente.setDisable(true);
+        dateFecha.setDisable(true);
     }
     
     /* Funciones de TableView */
