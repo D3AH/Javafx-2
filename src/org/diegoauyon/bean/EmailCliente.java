@@ -2,17 +2,17 @@ package org.diegoauyon.bean;
 
 public class EmailCliente {
     private int codigoEmailCliente;
-    private String email;
     private String descripcion;
+    private String email;
     private int codigoCliente;
 
     public EmailCliente() {
     }
 
-    public EmailCliente(int codigoEmailCliente, String email, String descripcion, int codigoCliente) {
+    public EmailCliente(int codigoEmailCliente, String descripcion, String email, int codigoCliente) {
         this.codigoEmailCliente = codigoEmailCliente;
-        this.email = email;
         this.descripcion = descripcion;
+        this.email = email;
         this.codigoCliente = codigoCliente;
     }
 
@@ -24,20 +24,20 @@ public class EmailCliente {
         this.codigoEmailCliente = codigoEmailCliente;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getCodigoCliente() {
@@ -47,6 +47,8 @@ public class EmailCliente {
     public void setCodigoCliente(int codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
+
+    
     
     @Override
     public String toString() {

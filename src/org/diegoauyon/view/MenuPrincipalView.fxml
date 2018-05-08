@@ -19,10 +19,20 @@
             <MenuItem mnemonicParsing="false" onAction="#ventanaMarcas" text="Marcas" />
             <MenuItem mnemonicParsing="false" onAction="#ventanaTallas" text="Tallas" />
             <MenuItem mnemonicParsing="false" onAction="#ventanaProductos" text="Productos" />
-            <MenuItem mnemonicParsing="false" onAction="#ventanaClientes" text="Cliente" />
-            <MenuItem mnemonicParsing="false" onAction="#ventanaProveedores" text="Proveedor" />
-            <MenuItem mnemonicParsing="false" onAction="#ventanaTelefonoProveedores" text="Telefono Proveedor" />
-            <MenuItem mnemonicParsing="false" onAction="#ventanaEmailProveedores" text="Email Proveedor" />
+                  <Menu mnemonicParsing="false" text="Proveedores">
+                    <items>
+                  <MenuItem mnemonicParsing="false" onAction="#ventanaProveedores" text="Proveedor" />
+                  <MenuItem mnemonicParsing="false" onAction="#ventanaTelefonoProveedores" text="Telefono Proveedor" />
+                  <MenuItem mnemonicParsing="false" onAction="#ventanaEmailProveedores" text="Email Proveedor" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Clientes">
+                    <items>
+                  <MenuItem mnemonicParsing="false" onAction="#ventanaClientes" text="Cliente" />
+                        <MenuItem mnemonicParsing="false" onAction="#ventanaTelefonoClientes" text="Telefono Cliente" />
+                        <MenuItem mnemonicParsing="false" onAction="#ventanaEmailClientes" text="Email Cliente" />
+                    </items>
+                  </Menu>
             <MenuItem mnemonicParsing="false" text="Salir" />
           </items>
         </Menu>

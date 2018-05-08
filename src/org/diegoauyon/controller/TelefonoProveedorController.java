@@ -243,7 +243,7 @@ public class TelefonoProveedorController implements Initializable{
     
     public void cargarDatos() {
         tblTelefonoProveedor.setItems(getTelefonoProveedor());
-        colCodigo.setCellValueFactory(new PropertyValueFactory<TelefonoProveedor,Integer>("codigoProveedor"));
+        colCodigo.setCellValueFactory(new PropertyValueFactory<TelefonoProveedor,Integer>("codigoTelefonoProveedor"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<TelefonoProveedor,String>("descripcion"));
         colNumero.setCellValueFactory(new PropertyValueFactory<TelefonoProveedor,String>("numero"));
     }

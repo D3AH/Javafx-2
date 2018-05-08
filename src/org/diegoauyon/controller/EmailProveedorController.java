@@ -243,7 +243,7 @@ public class EmailProveedorController implements Initializable{
     
     public void cargarDatos() {
         tblEmailProveedor.setItems(getEmailProveedor());
-        colCodigo.setCellValueFactory(new PropertyValueFactory<EmailProveedor,Integer>("codigoProveedor"));
+        colCodigo.setCellValueFactory(new PropertyValueFactory<EmailProveedor,Integer>("codigoEmailProveedor"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<EmailProveedor,String>("descripcion"));
         colEmail.setCellValueFactory(new PropertyValueFactory<EmailProveedor,String>("email"));
     }

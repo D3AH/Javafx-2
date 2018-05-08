@@ -12,11 +12,13 @@ import javafx.stage.Stage;
 import org.diegoauyon.controller.MenuPrincipalController;
 import org.diegoauyon.controller.CategoriaController;
 import org.diegoauyon.controller.ClienteController;
+import org.diegoauyon.controller.EmailClienteController;
 import org.diegoauyon.controller.EmailProveedorController;
 import org.diegoauyon.controller.MarcaController;
 import org.diegoauyon.controller.ProductoController;
 import org.diegoauyon.controller.ProveedorController;
 import org.diegoauyon.controller.TallaController;
+import org.diegoauyon.controller.TelefonoClienteController;
 import org.diegoauyon.controller.TelefonoProveedorController;
     
 
@@ -114,6 +116,24 @@ public class Principal extends Application {
         try {
             EmailProveedorController emailProveedorController = (EmailProveedorController) cambiarEscena("EmailProveedorView.fxml");
             emailProveedorController.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void ventanaTelefonoClientes() {
+        try {
+            TelefonoClienteController telefonoClienteController = (TelefonoClienteController) cambiarEscena("TelefonoClienteView.fxml");
+            telefonoClienteController.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void ventanaEmailClientes() {
+        try {
+            EmailClienteController emailClienteController = (EmailClienteController) cambiarEscena("EmailClienteView.fxml");
+            emailClienteController.setEscenarioPrincipal(this);
         } catch (Exception e) {
             e.printStackTrace();
         }

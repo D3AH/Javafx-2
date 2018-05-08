@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+
 import java.util.ArrayList;
 
 import java.sql.ResultSet;
@@ -67,7 +68,7 @@ public class EmailClienteController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cargarDatos();
-        cmbCliente.setItems(getClientees());
+        cmbCliente.setItems(getClientes());
     }
 
     public Principal getEscenarioPrincipal() {
@@ -243,7 +244,7 @@ public class EmailClienteController implements Initializable{
     
     public void cargarDatos() {
         tblEmailCliente.setItems(getEmailCliente());
-        colCodigo.setCellValueFactory(new PropertyValueFactory<EmailCliente,Integer>("codigoCliente"));
+        colCodigo.setCellValueFactory(new PropertyValueFactory<EmailCliente,Integer>("codigoEmailCliente"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<EmailCliente,String>("descripcion"));
         colEmail.setCellValueFactory(new PropertyValueFactory<EmailCliente,String>("email"));
     }
@@ -300,16 +301,14 @@ public class EmailClienteController implements Initializable{
         return listaEmailCliente = FXCollections.observableArrayList(lista);
     }
     
-    
-    
-    public ObservableList<Cliente> getClientees() {
+    public ObservableList<Cliente> getClientes() {
         ArrayList<Cliente> lista = new ArrayList<Cliente>();
         try {
             PreparedStatement procedimiento;
-            procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ListarClientees}");
+            procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_ListarClientes}");
             ResultSet resultado = procedimiento.executeQuery();
             while(resultado.next()){
-                lista.add(new Cliente(resultado.getInt("codigoCliente"),resultado.getString("contactoPrincipal"),resultado.getString("razonSocial"),resultado.getString("nit"),resultado.getString("paginaWeb"),resultado.getString("direccion")));
+                lista.add(new Cliente(resultado.getInt("codigoCliente"),resultado.getString("nombre"),resultado.getString("direccion"), resultado.getString("nit")));
             }
         } catch (Exception e) {
             e.printStackTrace();
