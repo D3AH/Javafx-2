@@ -278,7 +278,7 @@ public class FacturaController implements Initializable {
     
     public void cargarDatos() {
         tblFactura.setItems(getFacturas());
-        colCodigo.setCellValueFactory(new PropertyValueFactory<Factura, Integer>("codigoTelefonoCliente"));
+        colCodigo.setCellValueFactory(new PropertyValueFactory<Factura, Integer>("numeroFactura"));
         colEstado.setCellValueFactory(new PropertyValueFactory<Factura, String>("estado"));
         colNit.setCellValueFactory(new PropertyValueFactory<Factura, String>("nit"));
         colTotal.setCellValueFactory(new PropertyValueFactory<Factura, Integer>("total"));
