@@ -110,6 +110,19 @@ public class CategoriaController implements Initializable{
                 btnReporte.setDisable(false);
                 tipoDeOperacion = operaciones.NINGUNO;
                 break;
+            case ACTUALIZAR:
+                activarControles();
+                limpiarControles();
+                btnNuevo.setText("Nuevo");
+                btnEliminar.setText("Eliminar");
+                btnEditar.setText("Editar");
+                btnReporte.setText("Reporte");
+                btnNuevo.setDisable(false);
+                btnEliminar.setDisable(false);
+                btnEditar.setDisable(false);
+                btnReporte.setDisable(false);
+                tipoDeOperacion = operaciones.NINGUNO;
+                break;
         }
     }
     

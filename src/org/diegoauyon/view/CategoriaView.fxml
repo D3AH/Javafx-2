@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegoauyon.controller.CategoriaController">
+<VBox prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegoauyon.controller.CategoriaController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -95,7 +95,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnReporte" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Reporte">
+                  <Button fx:id="btnReporte" mnemonicParsing="false" onAction="#cancelar" prefHeight="40.0" prefWidth="80.0" text="Reporte">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

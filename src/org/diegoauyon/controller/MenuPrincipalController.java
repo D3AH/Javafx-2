@@ -66,4 +66,7 @@ public class MenuPrincipalController implements Initializable {
         escenarioPrincipal.ventanaFacturas();
     }
     
+    public void ventanaCompras() {
+        escenarioPrincipal.ventanaCompras();
+    }
 }

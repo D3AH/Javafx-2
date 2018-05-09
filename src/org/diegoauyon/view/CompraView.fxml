@@ -17,13 +17,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="555.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegoauyon.controller.FacturaController">
+<VBox prefHeight="555.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegoauyon.controller.CompraController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="Modulos">
                <items>
-            <MenuItem mnemonicParsing="false" onAction="#menuPrincipal" text="Menu principal" />
+                    <MenuItem mnemonicParsing="false" onAction="#menuPrincipal" text="Menu principal" />
                </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Reportes">
@@ -49,32 +49,26 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="592.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label alignment="CENTER" layoutX="209.0" layoutY="29.0" prefHeight="43.0" prefWidth="223.0" text="Factura">
+            <Label alignment="CENTER" layoutX="209.0" layoutY="29.0" prefHeight="43.0" prefWidth="223.0" text="Compra">
                <font>
                   <Font name="Century Gothic" size="24.0" />
                </font>
             </Label>
             <VBox layoutX="106.0" layoutY="83.0" prefHeight="183.0" prefWidth="100.0">
                <children>
-                  <Label prefHeight="37.0" prefWidth="100.0" text="Cliente" />
-                  <Label prefHeight="37.0" prefWidth="100.0" text="Estado" />
-                  <Label prefHeight="37.0" prefWidth="100.0" text="Nit" />
+                  <Label prefHeight="37.0" prefWidth="100.0" text="Proveedor" />
+                  <Label prefHeight="37.0" prefWidth="100.0" text="Descripción" />
                   <Label layoutX="10.0" layoutY="100.0" prefHeight="37.0" prefWidth="100.0" text="Fecha" />
                </children>
             </VBox>
             <VBox layoutX="267.0" layoutY="83.0" prefHeight="183.0" prefWidth="268.0">
                <children>
-                  <ComboBox fx:id="cmbCliente" disable="true" prefWidth="150.0" promptText="Codigo cliente">
+                  <ComboBox fx:id="cmbProveedor" disable="true" prefWidth="150.0" promptText="Razon Social">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <TextField fx:id="txtEstado" editable="false" promptText="Ingrese la estado de la factura">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <TextField fx:id="txtNit" editable="false" promptText="Ingrese el nit">
+                  <TextField fx:id="txtDescripcion" editable="false" promptText="Ingrese la descripción de la compra">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -86,11 +80,11 @@
                   </DatePicker>
                </children>
             </VBox>
-            <TableView fx:id="tblFactura" layoutX="56.0" layoutY="268.0" onKeyReleased="#seleccionarElemento" onMouseClicked="#seleccionarElemento" prefHeight="183.0" prefWidth="529.0">
+            <TableView fx:id="tblCompras" layoutX="56.0" layoutY="268.0" onKeyReleased="#seleccionarElemento" onMouseClicked="#seleccionarElemento" prefHeight="183.0" prefWidth="529.0">
               <columns>
-                <TableColumn fx:id="colCodigo" text="Codigo" />
-                <TableColumn fx:id="colEstado" minWidth="136.0" prefWidth="150.0" text="Estado" />
-                  <TableColumn fx:id="colNit" prefWidth="100.0" text="Nit" />
+                <TableColumn fx:id="colNumeroDocumento" prefWidth="30.0" text="#" />
+                <TableColumn fx:id="colDescripcion" minWidth="136.0" prefWidth="150.0" text="Descripción" />
+                  <TableColumn fx:id="colContactoPrincipal" prefWidth="150.0" text="Contacto Principal" />
                   <TableColumn fx:id="colTotal" prefWidth="100.0" text="Total" />
                   <TableColumn fx:id="colFecha" minWidth="100.0" prefWidth="-1.0" text="Fecha" />
               </columns>

@@ -109,6 +109,19 @@ public class ClienteController implements Initializable{
                 btnReporte.setDisable(false);
                 tipoDeOperacion = operaciones.NINGUNO;
                 break;
+            case ACTUALIZAR:
+                activarControles();
+                limpiarControles();
+                btnNuevo.setText("Nuevo");
+                btnEliminar.setText("Eliminar");
+                btnEditar.setText("Editar");
+                btnReporte.setText("Reporte");
+                btnNuevo.setDisable(false);
+                btnEliminar.setDisable(false);
+                btnEditar.setDisable(false);
+                btnReporte.setDisable(false);
+                tipoDeOperacion = operaciones.NINGUNO;
+                break;
         }
     }
     
@@ -251,7 +264,7 @@ public class ClienteController implements Initializable{
         
     }
     
-    public Cliente buscarCliente(int codigoCliente) {
+    public static Cliente buscarCliente(int codigoCliente) {
         Cliente objetoCliente = null;
         try {
             PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_BuscarCliente(?) }");

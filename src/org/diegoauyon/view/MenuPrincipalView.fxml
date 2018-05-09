@@ -39,6 +39,12 @@
                         <MenuItem mnemonicParsing="false" text="Detalle Factura" />
                     </items>
                   </Menu>
+                  <Menu mnemonicParsing="false" text="Compras">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#ventanaCompras" text="Compra" />
+                        <MenuItem mnemonicParsing="false" text="Detalle Compra" />
+                    </items>
+                  </Menu>
                   <MenuItem mnemonicParsing="false" text="Salir" />
           </items>
         </Menu>

@@ -281,11 +281,15 @@ public class FacturaController implements Initializable {
         colCodigo.setCellValueFactory(new PropertyValueFactory<Factura, Integer>("numeroFactura"));
         colEstado.setCellValueFactory(new PropertyValueFactory<Factura, String>("estado"));
         colNit.setCellValueFactory(new PropertyValueFactory<Factura, String>("nit"));
-        colTotal.setCellValueFactory(new PropertyValueFactory<Factura, Integer>("total"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<Factura, Float>("total"));
         colFecha.setCellValueFactory(new PropertyValueFactory<Factura, String>("fecha"));
     }
     
     public void seleccionarElemento() {
+        cmbCliente.getSelectionModel().select(ClienteController.buscarCliente(((Factura)tblFactura.getSelectionModel().getSelectedItem()).getCodigoCliente()));
+        txtNit.setText(((Factura)tblFactura.getSelectionModel().getSelectedItem()).getNit());
+        txtEstado.setText(((Factura)tblFactura.getSelectionModel().getSelectedItem()).getEstado());
+        dateFecha.setValue(((Factura)tblFactura.getSelectionModel().getSelectedItem()).getFecha());
         
     }
     
@@ -296,7 +300,7 @@ public class FacturaController implements Initializable {
             procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_ListarFacturas }");
             ResultSet resultado = procedimiento.executeQuery();
             while(resultado.next()){
-                lista.add(new Factura(resultado.getInt("numeroFactura"), resultado.getString("estado"), resultado.getString("nit"), resultado.getInt("total"),(resultado.getDate("fecha").toLocalDate()), resultado.getInt("codigoCliente")));
+                lista.add(new Factura(resultado.getInt("numeroFactura"), resultado.getString("estado"), resultado.getString("nit"), resultado.getFloat("total"),(resultado.getDate("fecha").toLocalDate()), resultado.getInt("codigoCliente")));
             }
         } catch (Exception e) {
             e.printStackTrace();

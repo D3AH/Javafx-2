@@ -6,14 +6,14 @@ public class Factura {
     private int numeroFactura;
     private String estado;
     private String nit;
-    private int total;
+    private float total;
     private LocalDate fecha;
     private int codigoCliente;
 
     public Factura() {
     }
 
-    public Factura(int numeroFactura, String estado, String nit, int total, LocalDate fecha, int codigoCliente) {
+    public Factura(int numeroFactura, String estado, String nit, float total, LocalDate fecha, int codigoCliente) {
         this.numeroFactura = numeroFactura;
         this.estado = estado;
         this.nit = nit;
@@ -46,11 +46,11 @@ public class Factura {
         this.nit = nit;
     }
 
-    public int getTotal() {
+    public float getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(float total) {
         this.total = total;
     }
 

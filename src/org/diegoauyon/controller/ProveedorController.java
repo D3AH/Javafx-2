@@ -117,6 +117,19 @@ public class ProveedorController implements Initializable{
                 btnReporte.setDisable(false);
                 tipoDeOperacion = operaciones.NINGUNO;
                 break;
+            case ACTUALIZAR:
+                activarControles();
+                limpiarControles();
+                btnNuevo.setText("Nuevo");
+                btnEliminar.setText("Eliminar");
+                btnEditar.setText("Editar");
+                btnReporte.setText("Reporte");
+                btnNuevo.setDisable(false);
+                btnEliminar.setDisable(false);
+                btnEditar.setDisable(false);
+                btnReporte.setDisable(false);
+                tipoDeOperacion = operaciones.NINGUNO;
+                break;
         }
     }
     
@@ -279,7 +292,7 @@ public class ProveedorController implements Initializable{
         
     }
     
-    public Proveedor buscarProveedor(int codigoProveedor) {
+    public static Proveedor buscarProveedor(int codigoProveedor) {
         Proveedor objetoProveedor = null;
         try {
             PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{ call sp_BuscarProveedor(?) }");
