@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="555.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegoauyon.controller.FacturaController">
+<VBox prefHeight="555.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegoauyon.controller.FacturaController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -95,7 +95,7 @@
                   <TableColumn fx:id="colFecha" minWidth="100.0" prefWidth="-1.0" text="Fecha" />
               </columns>
             </TableView>
-            <HBox layoutX="245.0" layoutY="467.0" prefHeight="43.0" prefWidth="340.0">
+            <HBox layoutX="133.0" layoutY="467.0" prefHeight="43.0" prefWidth="452.0">
                <children>
                   <Button fx:id="btnNuevo" mnemonicParsing="false" onAction="#nuevo" prefHeight="40.0" prefWidth="80.0" text="Nuevo">
                      <HBox.margin>
@@ -112,7 +112,12 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnReporte" mnemonicParsing="false" onAction="#cancelar" prefHeight="40.0" prefWidth="80.0" text="Reporte">
+                  <Button fx:id="btnReporte" mnemonicParsing="false" onAction="#generarReporte" prefHeight="40.0" prefWidth="80.0" text="Reporte">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnDetalle" mnemonicParsing="false" onAction="#detalle" prefHeight="40.0" prefWidth="80.0" text="Detalle">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

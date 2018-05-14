@@ -2,22 +2,23 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteFactura" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="05ad24a0-42c3-4a8b-a661-03d7705d78a5">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="61"/>
-	<parameter name="numeroDocumento" class="java.lang.Integer">
+	<property name="ireport.y" value="71"/>
+	<parameter name="numeroFactura" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\diego\\Documents\\NetBeansProjects\\NextSport2014277\\src\\org\\diegoauyon\\reporte\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[execute sp_BuscarCompra $P{numeroDocumento}]]>
+		<![CDATA[execute sp_BuscarFacturas $P{numeroFactura}]]>
 	</queryString>
-	<field name="numeroDocumento" class="java.lang.Integer"/>
-	<field name="descripcion" class="java.lang.String"/>
-	<field name="codigoProveedor" class="java.lang.Integer"/>
-	<field name="fecha" class="java.sql.Date"/>
+	<field name="numeroFactura" class="java.lang.Integer"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="nit" class="java.lang.String"/>
 	<field name="total" class="java.lang.Double"/>
-	<field name="razonSocial" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="codigoCliente" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -35,41 +36,27 @@
 				<text><![CDATA[Tienda DragonX]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="250" y="59" width="100" height="20" uuid="4deeb5d9-986d-4261-a70f-012da3174102"/>
-				<text><![CDATA[Reporte compra]]></text>
+				<reportElement x="277" y="59" width="100" height="20" uuid="4deeb5d9-986d-4261-a70f-012da3174102"/>
+				<text><![CDATA[Reporte Factura]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="94" splitType="Stretch">
+		<band height="93" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="100" height="33" uuid="fcd697bc-7386-4b59-94de-c0e452ea4447"/>
 				<textElement>
 					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[Numero Documento]]></text>
+				<text><![CDATA[Numero Factura]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="132" y="0" width="100" height="33" uuid="e31584db-65d2-446e-b6ac-37fd9221750d"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{numeroDocumento}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="0" y="43" width="100" height="31" uuid="dc88f284-8e98-4066-8196-baf5ff2fb1d5"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Razon Social]]></text>
+				<text><![CDATA[Nombre]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="132" y="43" width="100" height="31" uuid="1fe4dacd-b1b1-471b-984c-37ecbdea24f3"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="265" y="0" width="100" height="33" uuid="4d469235-f1c2-4e42-877a-4315dd7dc695"/>
 				<textElement>
@@ -84,6 +71,37 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="132" y="0" width="100" height="33" uuid="f3d6f4c5-7074-40e4-849d-5a13d5646155"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroFactura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="265" y="41" width="100" height="33" uuid="89e77370-2c31-4c6a-9529-25595f4378b2"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="398" y="41" width="100" height="33" uuid="a6b2f4cb-f63a-4286-b998-346b70b93110"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="43" width="100" height="31" uuid="863fd40a-c313-4c30-a514-6cb82c6f82d5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="572" height="93" forecolor="#3333FF" uuid="efdc8442-cad3-448c-a561-8e063e8c6cd1"/>
+			</rectangle>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -93,20 +111,24 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="22" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Detalle Compras]]></text>
+				<text><![CDATA[Detalle Factura]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="0" width="572" height="125" uuid="d77d5c83-c43b-4a6a-98b4-fd8c0c6305ac"/>
-				<subreportParameter name="codigoDetalleCompra">
-					<subreportParameterExpression><![CDATA[$F{numeroDocumento}]]></subreportParameterExpression>
+				<reportElement x="0" y="0" width="572" height="125" uuid="ddc33cdc-dcf3-4b68-b1eb-0785c63c3142"/>
+				<subreportParameter name="codigoDetalleCompra"/>
+				<subreportParameter name="numeroFactura">
+					<subreportParameterExpression><![CDATA[$F{numeroFactura}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "DetalleCompra.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "DetalleFactura.jasper"]]></subreportExpression>
 			</subreport>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="572" height="125" forecolor="#3333FF" uuid="e442e386-e8c2-46fa-bcc3-9356d9e5b233"/>
+			</rectangle>
 		</band>
 	</detail>
 	<pageFooter>

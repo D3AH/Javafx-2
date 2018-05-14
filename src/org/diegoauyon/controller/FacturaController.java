@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Date;
+import java.util.HashMap;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.collections.FXCollections;
@@ -26,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.diegoauyon.bean.Cliente;
 import org.diegoauyon.bean.Factura;
 import org.diegoauyon.db.Conexion;
+import org.diegoauyon.reporte.GenerarReporte;
 import org.diegoauyon.sistema.Principal;
 
 public class FacturaController implements Initializable {
@@ -76,6 +78,9 @@ public class FacturaController implements Initializable {
 
     @FXML
     private Button btnReporte;
+    
+    @FXML
+    private Button btnDetalle;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -93,6 +98,17 @@ public class FacturaController implements Initializable {
     
     public void menuPrincipal() {
         escenarioPrincipal.menuPrincipal();
+    }
+    
+    public void detalle() {
+        if(tblFactura.getSelectionModel().getSelectedItem() != null) {
+            escenarioPrincipal.ventanaDetalleFactura((Factura)tblFactura.getSelectionModel().getSelectedItem());
+        } else {
+            Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
+            alertInfo.setHeaderText(null);
+            alertInfo.setContentText("Debe seleccionar un registro.");
+            alertInfo.showAndWait();
+        }
     }
     
     /* Botones */
@@ -323,5 +339,31 @@ public class FacturaController implements Initializable {
         }
         
         return listaCliente = FXCollections.observableArrayList(lista);
+    }
+    
+    /* Reporte */
+    
+    public void generarReporte() {
+        switch(tipoDeOperacion){
+            case NINGUNO:
+                imprimirReporte();
+                tipoDeOperacion = operaciones.ACTUALIZAR;
+                break;
+            case ACTUALIZAR:
+                btnEditar.setText("");
+                btnReporte.setText("");
+                tipoDeOperacion = operaciones.NINGUNO;
+                btnNuevo.setDisable(false);
+                btnEliminar.setDisable(false);
+                activarControles();
+        }
+    }
+    
+    public void imprimirReporte(){
+        HashMap parametros = new HashMap();
+        parametros.put("_NumeroDocumento", null);
+        GenerarReporte.mostrarReporte("ReporteFactura.jasper", "Reporte de Compras", parametros);
+        
+        
     }
 }

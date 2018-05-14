@@ -10,12 +10,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.diegoauyon.bean.Compra;
+import org.diegoauyon.bean.Factura;
 /* Proyect's Class */
 import org.diegoauyon.controller.MenuPrincipalController;
 import org.diegoauyon.controller.CategoriaController;
 import org.diegoauyon.controller.ClienteController;
 import org.diegoauyon.controller.CompraController;
 import org.diegoauyon.controller.DetalleCompraController;
+import org.diegoauyon.controller.DetalleFacturaController;
 import org.diegoauyon.controller.EmailClienteController;
 import org.diegoauyon.controller.EmailProveedorController;
 import org.diegoauyon.controller.FacturaController;
@@ -167,6 +169,16 @@ public class Principal extends Application {
             DetalleCompraController detalleCompraController = (DetalleCompraController) cambiarEscena("DetalleCompraView.fxml");
             detalleCompraController.setCompra(compra);
             detalleCompraController.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void ventanaDetalleFactura(Factura factura) {
+        try {
+            DetalleFacturaController detalleFacturaController = (DetalleFacturaController) cambiarEscena("DetalleFacturaView.fxml");
+            detalleFacturaController.setFactura(factura);
+            detalleFacturaController.setEscenarioPrincipal(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
