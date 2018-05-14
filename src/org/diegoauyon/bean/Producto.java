@@ -138,5 +138,8 @@ public class Producto {
         this.talla = talla;
     }
     
-    
+    @Override
+    public String toString() {
+        return this.getCodigoProducto() + " | "+ this.getDescripcion();
+    }
 }

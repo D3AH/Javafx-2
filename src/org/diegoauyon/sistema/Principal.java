@@ -8,11 +8,14 @@ import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import org.diegoauyon.bean.Compra;
 /* Proyect's Class */
 import org.diegoauyon.controller.MenuPrincipalController;
 import org.diegoauyon.controller.CategoriaController;
 import org.diegoauyon.controller.ClienteController;
 import org.diegoauyon.controller.CompraController;
+import org.diegoauyon.controller.DetalleCompraController;
 import org.diegoauyon.controller.EmailClienteController;
 import org.diegoauyon.controller.EmailProveedorController;
 import org.diegoauyon.controller.FacturaController;
@@ -158,6 +161,17 @@ public class Principal extends Application {
             e.printStackTrace();
         }
     }
+    
+    public void ventanaDetalleCompra(Compra compra) {
+        try {
+            DetalleCompraController detalleCompraController = (DetalleCompraController) cambiarEscena("DetalleCompraView.fxml");
+            detalleCompraController.setCompra(compra);
+            detalleCompraController.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     
     public Initializable cambiarEscena(String fxml) throws Exception {
         Initializable resultado = null;

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteFactura" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="05ad24a0-42c3-4a8b-a661-03d7705d78a5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="61"/>
+	<parameter name="numeroDocumento" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\diego\\Documents\\NetBeansProjects\\NextSport2014277\\src\\org\\diegoauyon\\reporte\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[execute sp_BuscarCompra $P{numeroDocumento}]]>
+	</queryString>
+	<field name="numeroDocumento" class="java.lang.Integer"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="codigoProveedor" class="java.lang.Integer"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="total" class="java.lang.Double"/>
+	<field name="razonSocial" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="97" splitType="Stretch">
+			<image>
+				<reportElement x="85" y="5" width="115" height="74" uuid="d5f31f80-df29-48cf-b369-ac858f9b3a7c"/>
+				<imageExpression><![CDATA["C:\\Users\\diego\\Documents\\NetBeansProjects\\NextSport2014277\\src\\org\\diegoauyon\\image\\300px-Kingzone_DragonXlogo_square.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="200" y="22" width="298" height="37" uuid="d7c34f9c-8f1c-4ced-bc35-d9bec7601f34"/>
+				<textElement>
+					<font fontName="Adobe Arabic" size="24"/>
+				</textElement>
+				<text><![CDATA[Tienda DragonX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="59" width="100" height="20" uuid="4deeb5d9-986d-4261-a70f-012da3174102"/>
+				<text><![CDATA[Reporte compra]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="94" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="33" uuid="fcd697bc-7386-4b59-94de-c0e452ea4447"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Numero Documento]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="132" y="0" width="100" height="33" uuid="e31584db-65d2-446e-b6ac-37fd9221750d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroDocumento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="43" width="100" height="31" uuid="dc88f284-8e98-4066-8196-baf5ff2fb1d5"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Razon Social]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="132" y="43" width="100" height="31" uuid="1fe4dacd-b1b1-471b-984c-37ecbdea24f3"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="265" y="0" width="100" height="33" uuid="4d469235-f1c2-4e42-877a-4315dd7dc695"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="398" y="0" width="100" height="33" uuid="76a94333-edc8-41fc-8eb4-3ceda6d96a2e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="572" height="39" uuid="075b5084-de3c-4094-b1e0-93952081f522"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detalle Compras]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="572" height="125" uuid="d77d5c83-c43b-4a6a-98b4-fd8c0c6305ac"/>
+				<subreportParameter name="codigoDetalleCompra">
+					<subreportParameterExpression><![CDATA[$F{numeroDocumento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "DetalleCompra.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="572" height="20" uuid="f5d651e1-7cc5-4c7a-8d4d-b5477f15c188"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Dragon X ™ Todos los Derechos Reservados]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

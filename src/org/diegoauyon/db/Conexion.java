@@ -16,8 +16,8 @@ public class Conexion {
     public Conexion() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:sqlserver://LABC26-01;databaseName=DBNextSport2014277;user=dauyon;password=guatemala123456");
-//            conexion = DriverManager.getConnection("jdbc:sqlserver://D3H;databaseName=DBNextSport2014277;user=dauyon;password=guatemala123456");
+//            conexion = DriverManager.getConnection("jdbc:sqlserver://LABC26-01;databaseName=DBNextSport2014277;user=dauyon;password=guatemala123456");
+            conexion = DriverManager.getConnection("jdbc:sqlserver://D3H;databaseName=DBNextSport2014277;user=dauyon;password=guatemala123456");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {

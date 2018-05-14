@@ -110,5 +110,8 @@ public class Compra {
         this.direccion = direccion;
     }
     
-    
+    @Override
+    public String toString() {
+        return "dl;fj";
+    }
 }

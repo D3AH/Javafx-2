@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -25,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.diegoauyon.bean.Proveedor;
 import org.diegoauyon.bean.Compra;
 import org.diegoauyon.db.Conexion;
+import org.diegoauyon.reporte.GenerarReporte;
 import org.diegoauyon.sistema.Principal;
 
 public class CompraController implements Initializable {
@@ -141,18 +143,29 @@ public class CompraController implements Initializable {
         }
     }
     
+    public void detalle() {
+        if(tblCompras.getSelectionModel().getSelectedItem() != null) {
+            escenarioPrincipal.ventanaDetalleCompra((Compra)tblCompras.getSelectionModel().getSelectedItem());
+        } else {
+            Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
+            alertInfo.setHeaderText(null);
+            alertInfo.setContentText("Debe seleccionar un registro.");
+            alertInfo.showAndWait();
+        }
+    }    
+    
     /* Funciones de botones */
     
     public void agregar() {
         Compra registro = new Compra();
+        registro.setNumeroDocumento(Integer.parseInt(txtNumeroDocumento.getText()));
         registro.setDescripcion(txtDescripcion.getText());
-        registro.setContactoPrincipal(txtContactoPrincipal.getText());
         registro.setFecha(dateFecha.getValue());
         registro.setCodigoProveedor(((Proveedor)cmbProveedor.getSelectionModel().getSelectedItem()).getCodigoProveedor());
         try {
             PreparedStatement procedimiento = Conexion.getInstancia().getConexion().prepareCall("{call sp_AgregarCompra(?,?,?,?) }");
-            procedimiento.setString(1, registro.getDescripcion());
-            procedimiento.setString(2, registro.getContactoPrincipal());
+            procedimiento.setInt(1, registro.getNumeroDocumento());
+            procedimiento.setString(2, registro.getDescripcion());
             procedimiento.setDate(3, java.sql.Date.valueOf(registro.getFecha()));
             procedimiento.setInt(4, registro.getCodigoProveedor());
             procedimiento.execute();
@@ -225,22 +238,22 @@ public class CompraController implements Initializable {
     /* Controles */
     
     public void activarControles() {
+        txtNumeroDocumento.setEditable(true);
         txtDescripcion.setEditable(true);
-        txtContactoPrincipal.setEditable(true);
         dateFecha.setDisable(false);
         cmbProveedor.setDisable(false);
     }
     
     public void limpiarControles() {
+        txtNumeroDocumento.setText("");
         txtDescripcion.setText("");
-        txtContactoPrincipal.setText("");
         dateFecha.setValue(null);
         cmbProveedor.setValue("");
     }
     
     public void desactivarControles() {
+        txtNumeroDocumento.setEditable(false);
         txtDescripcion.setEditable(false);
-        txtContactoPrincipal.setEditable(false);
         dateFecha.setEditable(false);
         cmbProveedor.setDisable(true);
         dateFecha.setDisable(true);
@@ -250,6 +263,7 @@ public class CompraController implements Initializable {
     
     public void cargarDatos() {
         tblCompras.setItems(getCompras());
+        cmbProveedor.setItems(getProveedores());
         colNumeroDocumento.setCellValueFactory(new PropertyValueFactory<Compra, Integer>("numeroDocumento"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<Compra, String>("descripcion"));
         colContactoPrincipal.setCellValueFactory(new PropertyValueFactory<Compra, String>("contactoPrincipal"));
@@ -258,8 +272,9 @@ public class CompraController implements Initializable {
     }
     
     public void seleccionarElemento() {
-        cmbProveedor.getSelectionModel().select(ProveedorController.buscarProveedor(((Compra)tblCompras.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
+        txtNumeroDocumento.setText(String.valueOf(((Compra)tblCompras.getSelectionModel().getSelectedItem()).getNumeroDocumento()));
         txtDescripcion.setText(((Compra)tblCompras.getSelectionModel().getSelectedItem()).getDescripcion());
+        cmbProveedor.getSelectionModel().select(ProveedorController.buscarProveedor(((Compra)tblCompras.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
         dateFecha.setValue(((Compra)tblCompras.getSelectionModel().getSelectedItem()).getFecha());
         
     }
@@ -294,5 +309,31 @@ public class CompraController implements Initializable {
         }
         
         return listaProveedores = FXCollections.observableArrayList(lista);
+    }
+    
+    /* Reporte */
+    
+    public void generarReporte() {
+        switch(tipoDeOperacion){
+            case NINGUNO:
+                imprimirReporte();
+                tipoDeOperacion = operaciones.ACTUALIZAR;
+                break;
+            case ACTUALIZAR:
+                btnEditar.setText("");
+                btnReporte.setText("");
+                tipoDeOperacion = operaciones.NINGUNO;
+                btnNuevo.setDisable(false);
+                btnEliminar.setDisable(false);
+                activarControles();
+        }
+    }
+    
+    public void imprimirReporte(){
+        HashMap parametros = new HashMap();
+        parametros.put("_NumeroDocumento", null);
+        GenerarReporte.mostrarReporte("ReporteCompra.jasper", "Reporte de Compras", parametros);
+        
+        
     }
 }
